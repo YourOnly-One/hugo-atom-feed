@@ -1,3 +1,3 @@
 module codeberg.org/yelosan/hugo-feeds
 
-go 1.19
+go 1.20
