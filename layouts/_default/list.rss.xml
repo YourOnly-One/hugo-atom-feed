@@ -27,24 +27,24 @@
     <title>{{ if eq  .Title  .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }} on {{ end }}{{ .Site.Title }}{{ end }}</title>
     <link>{{ .Permalink }}</link>
     {{- with .OutputFormats.Get "RSS" }}
-      <atom:link rel="self" type="{{ .MediaType.Type | html }}" hreflang="{{ or ($.Site.LanguageCode) ($.Site.Language.Lang) }}" href="{{ .Permalink | safeURL }}" />
+      <atom:link rel="self" type="{{ .MediaType.Type | html }}" hreflang="{{ or ($.Site.Language.LanguageCode) ($.Site.Language.Lang) }}" href="{{ .Permalink | safeURL }}" />
     {{- end }}
     {{- if .IsTranslated -}}
       {{ range .Translations }}
-        <atom:link rel="alternate" type="application/rss+xml" hreflang="{{ or (.Site.LanguageCode) (.Site.Language.Lang) }}" href="{{ .Permalink }}index.xml" />
+        <atom:link rel="alternate" type="application/rss+xml" hreflang="{{ or (.Site.Language.LanguageCode) (.Site.Language.Lang) }}" href="{{ .Permalink }}index.xml" />
       {{- end -}}
       {{ range first 1 .AllTranslations }}
         <atom:link rel="alternate" type="application/rss+xml" hreflang="x-default" href="{{ .Permalink }}index.xml" />
       {{- end -}}
     {{ end }}
     {{- range .AlternativeOutputFormats }}
-      <atom:link rel="alternate" type="{{ .MediaType.Type | html }}" hreflang="{{ or ($.Site.LanguageCode) ($.Site.Language.Lang) }}" href="{{ .Permalink | safeURL }}" />
+      <atom:link rel="alternate" type="{{ .MediaType.Type | html }}" hreflang="{{ or ($.Site.Language.LanguageCode) ($.Site.Language.Lang) }}" href="{{ .Permalink | safeURL }}" />
     {{- end }}
     {{- range .Site.Params.websubhubs }}
       <atom:link rel="hub" href="{{ . }}" />
     {{- end -}}
     <description>Recent content {{ if ne  .Title  .Site.Title }}{{ with .Title }}in {{ . }} {{ end }}{{ end }}on {{ .Site.Title }}</description>
-    {{ with or (.Site.LanguageCode) (.Site.Language.Lang) }}<language>{{ . }}</language>{{ end }}
+    {{ with or (.Site.Language.LanguageCode) (.Site.Language.Lang) }}<language>{{ . }}</language>{{ end }}
     {{ with .Site.Copyright }}<copyright>{{ . }}</copyright>{{ end }}
     {{ if $semwebpersons }}{{ range $i, $semwebperson := index $semwebpersons }}{{ $dataperson := index $datapersons $semwebperson.person }}
       {{- /* note: else if [[semweb.persons]] is set in config file, use it to display a list of persons with fallback to /data/persons/ if present */}}
